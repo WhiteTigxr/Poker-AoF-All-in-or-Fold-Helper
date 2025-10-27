@@ -21,7 +21,7 @@
 
         <div id="tab-holdem" class="tab-content active">
             <h2>AoF Hold'em (4-Max)</h2>
-            <p>เลือก Stack, ตำแหน่ง, และสถานการณ์ เพื่อดู Range (GTO โดยประมาณ)</p>
+            <p>เลือก Stack, ตำแหน่ง, สถานการณ์, และใส่ไพ่ของคุณ เพื่อดูคำแนะนำ</p>
             
             <div class="range-controls three-cols"> 
                 <div class="form-group">
@@ -57,7 +57,19 @@
                 <select id="aof-h-villain-pos" class="form-control">
                     </select>
             </div>
+
+            <div class="form-group">
+                <label for="aof-h-hand">ไพ่ในมือของคุณ (Your Hand)</label>
+                <input type="text" id="aof-h-hand" class="form-control" placeholder="เช่น AKs, 77, T9o (ตัวพิมพ์ใหญ่/เล็กได้)">
+            </div>
+
+            <button id="aof-h-evaluate-btn" class="btn btn-evaluate">แสดงคำแนะนำสำหรับไพ่นี้</button>
+
+            <div id="aof-h-recommendation" class="result-box recommendation-box">
+                </div>
             
+            <hr class="divider">
+
             <div id="aof-h-legend" class="legend">
                 </div>
 
@@ -110,6 +122,40 @@
 
             <div id="aof-o-result" class="result-box">
                 </div>
+        </div>
+
+        <div id="tab-outs" class="tab-content">
+            <h2>Draw Equity Calculator (อ้างอิง)</h2>
+            <p>ป้อนจำนวน Outs ของคุณ (นับไพ่ที่รอ) เพื่อคำนวณเปอร์เซ็นต์ที่จะติด (Equity) ของคุณ</p>
+
+            <div class="form-group">
+                <label for="outs-count">คุณมีกี่ Outs?</label>
+                <input type="number" id="outs-count" class="form-control" placeholder="เช่น 9 (สำหรับ Flush Draw)">
+            </div>
+            <div class="form-group">
+                <label for="outs-street">คุณอยู่ที่ Street ไหน?</label>
+                <select id="outs-street" class="form-control">
+                    <option value="flop">อยู่หน้า Flop (รอดู Turn และ River)</option>
+                    <option value="turn">อยู่หน้า Turn (รอดู River)</option>
+                </select>
+            </div>
+            <button id="outs-calc-btn" class="btn">คำนวณ Equity (เปอร์เซ็นต์ติด)</button>
+
+            <div id="outs-result" class="result-box">
+                </div>
+
+            <div class="outs-guide">
+                <h3>คู่มือการนับ Outs (ที่พบบ่อย)</h3>
+                <ul>
+                    <li><strong>Flush Draw (รอสี):</strong> 9 Outs</li>
+                    <li><strong>OESD (รอตอง 2 หัว):</strong> 8 Outs</li>
+                    <li><strong>Pair + Flush Draw:</strong> 15 Outs (9+6)</li>
+                    <li><strong>Gutshot (รอไส้):</strong> 4 Outs</li>
+                    <li><strong>2 Overcards (ไพ่สูง 2 ใบ):</strong> 6 Outs (เพื่อติดคู่)</li>
+                    <li><strong>Pocket Pair (เพื่อติด Set):</strong> 2 Outs</li>
+                </ul>
+            </div>
+
         </div>
 
     </div><script src="script.js"></script>
