@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AoF (All-in or Fold) Helper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>AoF (All-in or Fold) Helper (4-Max)</h1>
+        </header>
+
+
+        <nav class="tab-nav">
+            <button class="tab-link active" data-tab="tab-holdem">AoF Hold'em (4-Max)</button>
+            <button class="tab-link" data-tab="tab-omaha">AoF Omaha (4-Max)</button>
+        </nav>
+
+        <div id="tab-holdem" class="tab-content active">
+            <h2>AoF Hold'em (4-Max)</h2>
+            <p>เลือก Stack, ตำแหน่ง, และสถานการณ์ เพื่อดู Range (GTO โดยประมาณ)</p>
+            
+            <div class="range-controls three-cols"> 
+                <div class="form-group">
+                    <label for="aof-h-stack">Stack Size (BB)</label>
+                    <select id="aof-h-stack" class="form-control">
+                        <option value="4bb">4 BB</option>
+                        <option value="6bb">6 BB</option>
+                        <option value="8bb" selected>8 BB</option>
+                        <option value="10bb">10 BB</option>
+                        <option value="12bb">12 BB</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aof-h-action">สถานการณ์ (Action)</label>
+                    <select id="aof-h-action" class="form-control">
+                        <option value="open">Open Shove</option>
+                        <option value="call">Call Shove</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aof-h-position">ตำแหน่งของคุณ</label>
+                    <select id="aof-h-position" class="form-control">
+                        <option value="utg">UTG</option>
+                        <option value="btn">BTN</option>
+                        <option value="sb">SB</option>
+                        <option value="bb">BB</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group hidden" id="aof-h-villain-group">
+                <label for="aof-h-villain-pos">คนที่ All-in มาก่อน อยู่ตำแหน่งไหน?</label>
+                <select id="aof-h-villain-pos" class="form-control">
+                    </select>
+            </div>
+            
+            <div id="aof-h-legend" class="legend">
+                </div>
+
+            <div id="aof-h-chart-container">
+                <h3 id="aof-h-title">Range: 8 BB - Open Shove - UTG</h3>
+                <table id="aof-h-grid" class="range-table">
+                    </table>
+            </div>
+
+        </div>
+
+        <div id="tab-omaha" class="tab-content">
+            <h2>AoF Omaha (4-Max)</h2>
+            <p>เลือก Stack, ตำแหน่ง, และสถานการณ์ เพื่อดูประเภทไพ่ที่ควรเล่น</p>
+            
+            <div class="range-controls three-cols">
+                 <div class="form-group">
+                    <label for="aof-o-stack">Stack Size (BB)</label>
+                    <select id="aof-o-stack" class="form-control">
+                        <option value="3bb">3 BB</option>
+                        <option value="5bb" selected>5 BB</option>
+                        <option value="7bb">7 BB</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aof-o-action">สถานการณ์ (Action)</label>
+                    <select id="aof-o-action" class="form-control">
+                        <option value="open">Open Shove</option>
+                        <option value="call">Call Shove</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="aof-o-position">ตำแหน่งของคุณ</label>
+                    <select id="aof-o-position" class="form-control">
+                        <option value="utg">UTG</option>
+                        <option value="btn">BTN</option>
+                        <option value="sb">SB</option>
+                        <option value="bb">BB</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group hidden" id="aof-o-villain-group">
+                <label for="aof-o-villain-pos">คนที่ All-in มาก่อน อยู่ตำแหน่งไหน?</label>
+                <select id="aof-o-villain-pos" class="form-control">
+                    </select>
+            </div>
+            
+            <button id="aof-o-calc-btn" class="btn">แสดง Range (Omaha)</button>
+
+            <div id="aof-o-result" class="result-box">
+                </div>
+        </div>
+
+    </div><script src="script.js"></script>
+</body>
+</html>
