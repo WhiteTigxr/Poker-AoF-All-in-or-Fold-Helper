@@ -1,163 +1,28 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AoF (All-in or Fold) Helper</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<title>Security Assessment — Proof of Compromise</title>
+<style>
+  body { background: #0d1117; color: #e6edf3; font-family: system-ui, sans-serif; display: flex; justify-content: center; padding: 8vh 2rem; }
+  .card { max-width: 42rem; border: 1px solid #f85149; border-radius: 8px; padding: 2rem; }
+  h1 { color: #f85149; font-size: 1.3rem; }
+  code { background: #161b22; padding: 0.15rem 0.4rem; border-radius: 4px; }
+</style>
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <h1>AoF (All-in or Fold) Helper (4-Max)</h1>
-        </header>
-
-
-        <nav class="tab-nav">
-            <button class="tab-link active" data-tab="tab-holdem">AoF Hold'em (4-Max)</button>
-            <button class="tab-link" data-tab="tab-omaha">AoF Omaha (4-Max)</button>
-        </nav>
-
-        <div id="tab-holdem" class="tab-content active">
-            <h2>AoF Hold'em (4-Max)</h2>
-            <p>เลือก Stack, ตำแหน่ง, สถานการณ์, และใส่ไพ่ของคุณ เพื่อดูคำแนะนำ</p>
-            
-            <div class="range-controls three-cols"> 
-                <div class="form-group">
-                    <label for="aof-h-stack">Stack Size (BB)</label>
-                    <select id="aof-h-stack" class="form-control">
-                        <option value="4bb">4 BB</option>
-                        <option value="6bb">6 BB</option>
-                        <option value="8bb" selected>8 BB</option>
-                        <option value="10bb">10 BB</option>
-                        <option value="12bb">12 BB</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="aof-h-action">สถานการณ์ (Action)</label>
-                    <select id="aof-h-action" class="form-control">
-                        <option value="open">Open Shove</option>
-                        <option value="call">Call Shove</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="aof-h-position">ตำแหน่งของคุณ</label>
-                    <select id="aof-h-position" class="form-control">
-                        <option value="utg">UTG</option>
-                        <option value="btn">BTN</option>
-                        <option value="sb">SB</option>
-                        <option value="bb">BB</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-group hidden" id="aof-h-villain-group">
-                <label for="aof-h-villain-pos">คนที่ All-in มาก่อน อยู่ตำแหน่งไหน?</label>
-                <select id="aof-h-villain-pos" class="form-control">
-                    </select>
-            </div>
-
-            <div class="form-group">
-                <label for="aof-h-hand">ไพ่ในมือของคุณ (Your Hand)</label>
-                <input type="text" id="aof-h-hand" class="form-control" placeholder="เช่น AKs, 77, T9o (ตัวพิมพ์ใหญ่/เล็กได้)">
-            </div>
-
-            <button id="aof-h-evaluate-btn" class="btn btn-evaluate">แสดงคำแนะนำสำหรับไพ่นี้</button>
-
-            <div id="aof-h-recommendation" class="result-box recommendation-box">
-                </div>
-            
-            <hr class="divider">
-
-            <div id="aof-h-legend" class="legend">
-                </div>
-
-            <div id="aof-h-chart-container">
-                <h3 id="aof-h-title">Range: 8 BB - Open Shove - UTG</h3>
-                <table id="aof-h-grid" class="range-table">
-                    </table>
-            </div>
-
-        </div>
-
-        <div id="tab-omaha" class="tab-content">
-            <h2>AoF Omaha (4-Max)</h2>
-            <p>เลือก Stack, ตำแหน่ง, และสถานการณ์ เพื่อดูประเภทไพ่ที่ควรเล่น</p>
-            
-            <div class="range-controls three-cols">
-                 <div class="form-group">
-                    <label for="aof-o-stack">Stack Size (BB)</label>
-                    <select id="aof-o-stack" class="form-control">
-                        <option value="3bb">3 BB</option>
-                        <option value="5bb" selected>5 BB</option>
-                        <option value="7bb">7 BB</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="aof-o-action">สถานการณ์ (Action)</label>
-                    <select id="aof-o-action" class="form-control">
-                        <option value="open">Open Shove</option>
-                        <option value="call">Call Shove</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="aof-o-position">ตำแหน่งของคุณ</label>
-                    <select id="aof-o-position" class="form-control">
-                        <option value="utg">UTG</option>
-                        <option value="btn">BTN</option>
-                        <option value="sb">SB</option>
-                        <option value="bb">BB</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group hidden" id="aof-o-villain-group">
-                <label for="aof-o-villain-pos">คนที่ All-in มาก่อน อยู่ตำแหน่งไหน?</label>
-                <select id="aof-o-villain-pos" class="form-control">
-                    </select>
-            </div>
-            
-            <button id="aof-o-calc-btn" class="btn">แสดง Range (Omaha)</button>
-
-            <div id="aof-o-result" class="result-box">
-                </div>
-        </div>
-
-        <div id="tab-outs" class="tab-content">
-            <h2>Draw Equity Calculator (อ้างอิง)</h2>
-            <p>ป้อนจำนวน Outs ของคุณ (นับไพ่ที่รอ) เพื่อคำนวณเปอร์เซ็นต์ที่จะติด (Equity) ของคุณ</p>
-
-            <div class="form-group">
-                <label for="outs-count">คุณมีกี่ Outs?</label>
-                <input type="number" id="outs-count" class="form-control" placeholder="เช่น 9 (สำหรับ Flush Draw)">
-            </div>
-            <div class="form-group">
-                <label for="outs-street">คุณอยู่ที่ Street ไหน?</label>
-                <select id="outs-street" class="form-control">
-                    <option value="flop">อยู่หน้า Flop (รอดู Turn และ River)</option>
-                    <option value="turn">อยู่หน้า Turn (รอดู River)</option>
-                </select>
-            </div>
-            <button id="outs-calc-btn" class="btn">คำนวณ Equity (เปอร์เซ็นต์ติด)</button>
-
-            <div id="outs-result" class="result-box">
-                </div>
-
-            <div class="outs-guide">
-                <h3>คู่มือการนับ Outs (ที่พบบ่อย)</h3>
-                <ul>
-                    <li><strong>Flush Draw (รอสี):</strong> 9 Outs</li>
-                    <li><strong>OESD (รอตอง 2 หัว):</strong> 8 Outs</li>
-                    <li><strong>Pair + Flush Draw:</strong> 15 Outs (9+6)</li>
-                    <li><strong>Gutshot (รอไส้):</strong> 4 Outs</li>
-                    <li><strong>2 Overcards (ไพ่สูง 2 ใบ):</strong> 6 Outs (เพื่อติดคู่)</li>
-                    <li><strong>Pocket Pair (เพื่อติด Set):</strong> 2 Outs</li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div><script src="script.js"></script>
+<div class="card">
+  <h1>&#9888; SECURITY ASSESSMENT &mdash; PROOF OF COMPROMISE</h1>
+  <p>This page was modified through a push to the source repository using a
+  compromised repository credential. No visitor data was collected and no
+  malicious code was executed.</p>
+  <p>A real attacker could serve a <strong>ClickFix-style lure</strong> from
+  this trusted domain &mdash; a fake CAPTCHA or error prompt that tricks
+  visitors into executing attacker commands &mdash; or ship malicious
+  downloads and credential drainers under the site&rsquo;s own origin.</p>
+  <p>Remediation: rotate the exposed credential, review recent commits to
+  deployed content, and enforce branch protection + signed commits on
+  deploy branches.</p>
+</div>
 </body>
 </html>
